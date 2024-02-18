@@ -42,6 +42,7 @@ class GPTWebElement(webdriver.remote.webelement.WebElement):
 
 
 class GPTSeleniumAgent:
+    
     def __init__(
         self,
         instructions="",
@@ -50,10 +51,10 @@ class GPTSeleniumAgent:
         user_data_dir="user_data",
         headless=False,
         retry=False,
-        model_for_instructions="gpt-3.5-turbo",
-        model_for_responses="gpt-3.5-turbo",
+        model_for_instructions="gpt-4-turbo-preview",
+        model_for_responses="gpt-4-turbo-preview",
         memory_folder=None,
-        debug=False,
+        debug=True,
         debug_html_folder="",
         instruction_output_file=None,
         close_after_completion=True,

@@ -1,0 +1,9 @@
+Go to Google.com
+Find all textareas.
+Find the first visible textarea.
+Click on the first visible textarea.
+Type in "buffalo buffalo buffalo buffalo buffalo" and press enter.
+Wait 2 seconds.
+Find all anchor elements that link to Wikipedia.
+Click on the first one.
+Wait for 10 seconds.

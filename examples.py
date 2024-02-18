@@ -6,7 +6,6 @@ from browserpilot.agents.gpt_selenium_agent import GPTSeleniumAgent
 # from browserpilot.agents.goal_agent import GoalAgent
 
 # Set OpenAI API key.
-openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # Set up multiple command CLI.
 @click.group()
@@ -17,7 +16,7 @@ def cli():
 @cli.command()
 @click.argument("instructions")
 @click.option("--chromedriver_path", default="./chromedriver", help="chromedriver path")
-@click.option("--model", default="gpt-3.5-turbo", help="which model?")
+@click.option("--model", default="gpt-4-turbo-preview", help="which model?")
 @click.option("--memory_folder", default=None, help="Memory folder.")
 @click.option("--debug", is_flag=True, help="Enable debugging.")
 @click.option("--output", default=None, help="Instruction output file.")

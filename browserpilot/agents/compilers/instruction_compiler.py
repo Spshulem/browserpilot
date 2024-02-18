@@ -1,6 +1,9 @@
 """InstructionCompiler class."""
 import time
 import openai
+from openai import OpenAI
+
+client = OpenAI()
 import json
 import yaml
 import io
@@ -77,7 +80,7 @@ class InstructionCompiler:
         self,
         instructions=None,
         base_prompt=BASE_PROMPT,
-        model="gpt-3.5-turbo",
+        model="gpt-4-turbo-preview",
         use_compiled=True,
     ):
         """Initialize the compiler. The compiler handles the sequencing of
@@ -280,34 +283,30 @@ class InstructionCompiler:
             return text
 
         try:
-            if "gpt-3.5-turbo" in model or "gpt-4" in model:
-                response = openai.ChatCompletion.create(
-                    model=model,
-                    messages=[{"role": "user", "content": prompt}],
-                    max_tokens=max_tokens,
-                    top_p=1,
-                    frequency_penalty=0,
-                    presence_penalty=0,
-                    temperature=temperature,
-                    stop=stop,
-                )
-                text = response["choices"][0]["message"]["content"]
+            if "gpt-4-turbo-preview" in model or "gpt-4" in model:
+                response = client.chat.completions.create(model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=max_tokens,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0,
+                temperature=temperature,
+                stop=stop)
+                text = response.choices[0].message.content
             else:
-                response = openai.Completion.create(
-                    model=model,
-                    prompt=prompt,
-                    max_tokens=max_tokens,
-                    top_p=1,
-                    frequency_penalty=0,
-                    presence_penalty=0,
-                    best_of=1,
-                    temperature=temperature,
-                    stop=stop,
-                )
-                text = response["choices"][0]["text"]
+                response = client.completions.create(model=model,
+                prompt=prompt,
+                max_tokens=max_tokens,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0,
+                best_of=1,
+                temperature=temperature,
+                stop=stop)
+                text = response.choices[0].text
         except (
-            openai.error.RateLimitError,
-            openai.error.APIError,
+            openai.RateLimitError,
+            openai.APIError,
             openai.error.Timeout,
             openai.error.APIConnectionError,
         ) as exc:

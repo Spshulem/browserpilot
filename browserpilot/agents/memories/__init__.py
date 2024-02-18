@@ -21,7 +21,7 @@ INDEX_TYPES = {
 LLM_PREDICTOR_TYPES = {
     "gpt-3.5-turbo": ChatOpenAI,
     "gpt-3.5-turbo-16k": ChatOpenAI,
-    "gpt-4": ChatOpenAI,
+    "gpt-4-turbo-preview": ChatOpenAI,
 }
 
 
